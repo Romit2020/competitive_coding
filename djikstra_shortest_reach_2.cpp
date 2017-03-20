@@ -14,6 +14,7 @@ typedef vector<pii> vii;
 
 int main() {
     /* Enter your code here. Read input from STDIN. Print output to STDOUT */  
+    ios_base::sync_with_stdio(false);
     int t;
     cin>>t;
     while(t--){
