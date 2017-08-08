@@ -1,0 +1,88 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define fi first
+#define se second
+#define mp make_pair
+
+
+int rown,coln;
+
+bool isvalid(int a,int b){
+    if(a>=0 && a<rown && b>=0 && b<coln)
+    return true;
+    
+    return false;
+}
+
+int main() {
+	//code
+
+int row[] = {-1, 0, 0, 1};
+int col[] = {0, -1, 1, 0};
+	
+	int t;
+	cin>>t;
+	while(t--){
+	    
+	    int n,m;
+	    cin>>n>>m;
+	    rown = n;
+	    coln = m;
+	    int ar[n][m],i,j,k,a,b,x1,y1;
+	    for(i=0;i<n;i++){
+	        for(j=0;j<m;j++){
+	            cin>>ar[i][j];
+	        }
+	    }
+	    cin>>x1>>y1;
+	    bool vis[n][m];
+	    memset(vis,false,sizeof(vis));
+	    
+	    if(ar[0][0]==0 || ar[x1][y1]==0){
+	        cout<<-1<<endl;
+	        continue;
+	    }
+	    
+	    vis[0][0]=true;
+	    
+	    queue< pair< pair<int,int>,int > >q;
+	    
+	    q.push(mp(mp(0,0),0));
+	    
+	    int flag=0;
+	    
+	    while(!q.empty()){
+	        
+	       pair< pair<int,int>,int > temp  = q.front();
+	       q.pop();
+	       
+	       
+	       if(temp.fi.fi == x1 && temp.fi.se==y1){
+	           flag=1;
+	           cout<<temp.se<<endl;
+	           break;
+	       }
+	       
+	       for(i=0;i<4;i++){
+	           if(isvalid(temp.fi.fi+row[i],temp.fi.se+col[i]) 
+	           && !vis[temp.fi.fi+row[i]][temp.fi.se+col[i]]
+	           && ar[temp.fi.fi+row[i]][temp.fi.se+col[i]]){
+	               
+	               //cout<<temp.fi.fi+row[i]<<" "<<temp.fi.se+col[i]<<"\n";
+	               
+	               q.push(mp(mp(temp.fi.fi+row[i],temp.fi.se+col[i]),temp.se+1));
+	               vis[temp.fi.fi][temp.fi.se]=true;
+	           }
+	       }
+	        
+	        
+	    }
+	    
+	    if(flag==0)
+	    cout<<-1<<endl;
+	    
+	}
+	
+   return 0;
+}
