@@ -1,0 +1,58 @@
+#include <iostream>
+using namespace std;
+
+void swap(int *a,int *b){
+    int temp = *a;
+    *a= *b;
+    *b = temp;
+}
+
+
+void sort(int ar[],int n){
+    int i,j;
+    for(i=0;i<n;i++){
+        for(j=i+1;j<n;j++){
+            if(ar[i] > ar[j]){
+                swap(&ar[i],&ar[j]);
+            }
+        }
+    }
+}
+
+int main() {
+	//code
+	int t;
+	cin>>t;
+	while(t--){
+	    int n,i,j,k,x,flag=0;
+	    cin>>n>>x;
+	    int ar[n];
+	    for(i=0;i<n;i++){
+	        cin>>ar[i];
+	    }
+	    
+	    sort(ar,n);
+	    
+	    for(i=0;i<n-2;i++){
+	        j=i+1;k=n-1;
+	        while(j<k){
+	            if(ar[i]+ar[j]+ar[k]==x){
+	                flag=1;
+	                break;
+	            }
+	            if(ar[i]+ar[j]+ar[k] < x ){
+	                j++;
+	            }
+	            else{
+	                k--;
+	            }
+	        }
+	        if(flag)break;
+	    }
+	    
+	    if(flag)cout<<1<<endl;
+	    else cout<<0<<endl;
+	    
+	}
+	return 0;
+}
