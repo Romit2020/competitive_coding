@@ -1,0 +1,86 @@
+#include <iostream>
+using namespace std;
+
+void swap(int *a,int *b){
+    int temp;
+    temp = *a;
+    *a = *b;
+    *b = temp;
+}
+
+void sort(int ar[],int s,int e){
+    int i,j;
+    for(i=s;i<e;i++){
+        for(j=i+1;j<=e;j++){
+            if(ar[i] > ar[j]){
+                swap(&ar[i],&ar[j]);
+            }
+        }
+    }
+}
+
+int main() {
+	//code
+	int t;
+	cin>>t;
+	while(t--){
+	    int n,i,j,k;
+        cin>>n;
+        int ar[10];
+        int t = n;
+        i=0;
+        while(t){
+            ar[i] = t%10;
+            t = t/10;
+            i++;
+        }
+        n = i-1;
+        i=0;
+        t = n;
+        while(i<t){
+            swap(ar[i],ar[t]);
+            i++;t--;
+        }
+	    //for(i=0;i<=n;i++)
+	    //cout<<ar[i];
+       
+       
+    for(i=n;i>0;i--){
+        if(ar[i-1] < ar[i])
+        break;
+    }
+    
+    if(i==0){
+        cout<<"not possible\n";
+        continue;
+    }
+    
+    int ind = i-1;
+    int reqind = i;
+    //cout<<ar[ind];
+    for(i=ind+1;i<=n;i++){
+        if(ar[i] > ar[ind] && ar[i] < ar[reqind]){
+            reqind = i;
+        }
+    }
+        
+    //cout<<ar[ind]<<" "<<ar[reqind];    
+    
+    swap(&ar[ind],&ar[reqind]);
+    
+    sort(ar,ind+1,n);
+    
+	    for(i=0;i<=n;i++)
+	    cout<<ar[i];    
+    
+    
+    
+    
+    
+        
+    cout<<endl; 
+	    
+	}
+	
+	return 0;
+}
