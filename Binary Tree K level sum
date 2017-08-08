@@ -1,0 +1,49 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	//code
+	int t;
+	cin>>t;
+	while(t--){
+	    string s;
+        int i,j,k,l;
+        cin>>k;
+        cin>>s;
+        l = s.length();
+        int level = -1,sum=0;
+        
+	    
+	    i=0;
+	    while(i<l){
+	        if(s[i]=='('){
+	            level++;
+	            i++;
+	        }
+	        else if(s[i]==')'){
+	            level--;
+	            i++;
+	        }
+	        else{
+                int temp = 0;
+                
+                while(s[i] >= '0' && s[i] <= '9'){
+                    temp = temp*10;
+                    temp += s[i]-'0';
+                    i++;
+                }
+                
+                if(level == k){
+                sum += temp;
+                temp=0;
+                }
+                
+                
+	        }
+	    }
+	    
+	    cout<<sum<<endl;
+	    
+	}
+	return 0;
+}
