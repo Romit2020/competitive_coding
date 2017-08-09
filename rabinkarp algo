@@ -1,0 +1,61 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+
+int prime = 101;
+ 
+bool check(string text,int s,int e,string patt,int pe){
+	int i=s,j=0;
+	while(i<=e && j<=pe){
+		if(text[i] != patt[j])
+		return false;
+		i++;j++;
+	}
+	
+	return true;
+} 
+
+ 
+int main(){
+	
+	string text,patt;
+	cin>>text;
+	cin>>patt;
+	int tl = text.length(),pl = patt.length(),i,j,k;
+	
+	int hp=0,ht=0;
+	
+	for(i=0;i<pl;i++){
+		hp += pow(prime,i)*patt[i];
+		ht += pow(prime,i)*text[i];
+	}
+	
+	cout<<hp<<" "<<ht<<endl;
+	
+	if(hp==ht){
+		if(check(text,0,pl-1,patt,pl-1)){
+			cout<<"patt found at "<<i-pl<<endl;
+		}
+	}
+	
+	//cout<<text[0]*1<<endl;
+	
+	for(i=pl;i<tl;i++){
+		int nh = ht - text[i-pl];//cout<<nh<<" nh1 ";
+		nh = nh/prime;//cout<<nh<<" nh2 ";
+		nh += (text[i])*pow(prime,pl-1);
+		
+	//cout<<text[i-pl+1]<<" "<<text[i]<<" "<<nh<<endl;
+		ht = nh;	
+		
+		if(nh == hp){
+			//cout<<"yee\n";
+		if(check(text,i-pl+1,i,patt,pl-1)){
+			cout<<"text found at "<<i-pl+1<<endl;
+		}
+		}
+
+	}
+	
+	return 0;
+}
